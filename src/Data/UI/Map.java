@@ -1,4 +1,6 @@
-package Data;
+package Data.UI;
+import Data.Block.*;
+import Data.Point;
 import Exceptions.OutOfMapException;
 
 public class Map {
@@ -16,6 +18,20 @@ public class Map {
             for (int j=0; j<mapBlocks[i].length; j++)
                 this.mapBlocks[i][j] = new AirBlock();
         this.AddSea();
+    }
+
+    public boolean isSmeltable(Point point) throws OutOfMapException{
+        if(point.x >= this.sizeX || point.y >= this.sizeY)
+            throw new OutOfMapException();
+
+        return this.mapBlocks[point.x][point.y] instanceof SmeltableBlock;
+    }
+    public SmeltableBlock getSmeltableBlock(Point point) throws OutOfMapException{
+
+        if(isSmeltable(point)){
+            return (SmeltableBlock) this.mapBlocks[point.x][point.y];
+        }
+        return new NullBlock();
     }
 
     public void AddSea(){

@@ -1,4 +1,8 @@
-package Data;
+package Data.UI;
+
+import Data.Block.Block;
+import Data.Block.NullBlock;
+import Data.Block.SmeltableBlock;
 
 public class Furnace {
     public SmeltableBlock input;
@@ -18,7 +22,7 @@ public class Furnace {
         this.smeltInput();
     }
 
-    private void DisplayOnOut(){
+    public void DisplayOnOut(){
         System.out.println("|| "
                 +this.input.Display()
                 +" --> "
