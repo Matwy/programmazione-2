@@ -13,7 +13,9 @@ public class Main {
         Map map = new Map(8, 8);
 
         try {
-            map.insertBlockAtPoint(new Point(), 'A');
+            map.insertBlockAtPoint(new Point(), 'S');
+            map.insertBlockAtPoint(new Point(), 'S');
+            map.insertBlockAtPoint(new Point(), 'S');
         } catch (OutOfMapException e) {
             throw new RuntimeException(e);
         }
