@@ -38,11 +38,15 @@ public class Map {
         // Insert The block
         this.mapBlocks[insertPoint.x][insertPoint.y] = block;
 
+        if(!block.isGravity())
+            return;
+
         // if the block has gravity swap it down until
         // there is one block without fallthrough or i goes to the map bound
-        int i = insertPoint.x + 1;
-        while(block.isGravity() && i < this.sizeY && this.mapBlocks[i][insertPoint.y].isFallThrough()){
-            this.swapCell(insertPoint, new Point(i, insertPoint.y));
+        int i = insertPoint.y + 1;
+        while(block.isGravity() && i < this.sizeY && this.mapBlocks[insertPoint.x][i].isFallThrough()){
+            this.swapCell(new Point(insertPoint.x, i-1), new Point(insertPoint.x, i));
+            i++;
         }
 
     }

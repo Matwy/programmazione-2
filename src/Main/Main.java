@@ -10,7 +10,7 @@ public class Main {
     }
 
     public static void test(){
-        Map map = new Map(16, 16);
+        Map map = new Map(8, 8);
 
         try {
             map.insertBlockAtPoint(new Point(), 'A');
