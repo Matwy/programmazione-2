@@ -3,10 +3,13 @@ import Data.Block.*;
 import Data.Point;
 import Exceptions.OutOfMapException;
 
+import java.util.Random;
+
 public class Map {
 
-    private AbstractBlock[][] mapBlocks;
+    private Block[][] mapBlocks;
     private int sizeX, sizeY;
+    private final int RANDOM_BLOCKS_TO_ADD=8;
 
     public Map(int sizex, int sizey)
     {
@@ -18,10 +21,24 @@ public class Map {
             for (int j=0; j<mapBlocks[i].length; j++)
                 this.mapBlocks[i][j] = new AirBlock();
         this.AddSea();
+        Random rand = new Random();
+        for (int i = 0 ; i < RANDOM_BLOCKS_TO_ADD; i++){
+            Block b = new SandBlock();
+            int row = rand.nextInt(this.sizeX);
+            int col = rand.nextInt(this.sizeY);
+            try {
+                this.insertBlockAtPoint(new Point(row, col), b);
+            } catch (OutOfMapException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
+    public boolean isInMapBound(Point point){
+        return point.x < this.sizeX && point.y < this.sizeY;
+    }
     public boolean isSmeltable(Point point) throws OutOfMapException{
-        if(point.x >= this.sizeX || point.y >= this.sizeY)
+        if(isInMapBound(point))
             throw new OutOfMapException();
 
         return this.mapBlocks[point.x][point.y] instanceof SmeltableBlock;
@@ -57,28 +74,26 @@ public class Map {
 
     private void swapCell(Point point1, Point point2)
     {
-        AbstractBlock b1 = this.mapBlocks[point1.x][point1.y];
-        AbstractBlock b2 = this.mapBlocks[point2.x][point2.y];
+        Block b1 = this.mapBlocks[point1.x][point1.y];
+        Block b2 = this.mapBlocks[point2.x][point2.y];
 
         this.mapBlocks[point1.x][point1.y] = b2;
         this.mapBlocks[point2.x][point2.y] = b1;
     }
 
-    public void insertBlockAtPoint(Point insertPoint, AbstractBlock block) throws OutOfMapException{
-        if(insertPoint.x >= this.sizeX || insertPoint.y >= this.sizeY)
+    public void insertBlockAtPoint(Point insertPoint, Block block) throws OutOfMapException{
+        if(isInMapBound(insertPoint))
             throw new OutOfMapException();
 
         // Insert The block
         this.mapBlocks[insertPoint.x][insertPoint.y] = block;
 
-        System.out.println(!block.isGravity());
         if(!block.isGravity())
             return;
 
         // if the block has gravity swap it down until
         // there is one block without fallthrough or i goes to the map bound
         int i = insertPoint.y + 1;
-        System.out.println(i);
         while(i < this.sizeY && this.mapBlocks[insertPoint.x][i].isFallThrough()){
             this.swapCell(new Point(insertPoint.x, i-1), new Point(insertPoint.x, i));
             i++;
