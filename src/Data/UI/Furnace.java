@@ -13,13 +13,16 @@ public class Furnace {
         this.output = new NullBlock();
     }
 
-    private void smeltInput(){
+    public void smeltInput(){
         this.output = this.input.smelt();
         this.input = new NullBlock();
     }
     public void setInput(SmeltableBlock inputBlock){
         this.input = inputBlock;
         this.smeltInput();
+    }
+    public SmeltableBlock getInput(){
+        return this.input;
     }
 
     public void DisplayOnOut(){

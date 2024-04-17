@@ -1,7 +1,9 @@
 package Data.UI;
 
+import Data.Block.interfaces.Block;
 import Data.Block.interfaces.SmeltableBlock;
 import Data.Point;
+import Exceptions.BlockErrorException;
 import Exceptions.OutOfMapException;
 
 public class MainView {
@@ -21,6 +23,21 @@ public class MainView {
 
         this.map.insertBlockAtPoint(point, '.');
         this.inventory.addBlock(this.furnace.output);
+    }
+    public void fromInventoryIntoFurnace(int index) throws BlockErrorException {
+        SmeltableBlock block = this.inventory.getSmeltableItem(index);
+        this.furnace.setInput(block);
+    }
+    public void fromFurnaceIntoInventory(){
+        this.inventory.addBlock(this.furnace.output);
+    }
+    public void pickUpBlock(Point p) throws OutOfMapException, BlockErrorException {
+        Block b = this.map.gimmiePickable(p);
+        this.inventory.addBlock(b);
+    }
+    public void toggleInventoryComparator(){}
+    public void smelt(){
+        this.furnace.smeltInput();
     }
     public void DisplayInOut(){
         this.map.DisplayOnOut();

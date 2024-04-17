@@ -3,6 +3,7 @@ import Data.Block.*;
 import Data.Block.interfaces.Block;
 import Data.Block.interfaces.SmeltableBlock;
 import Data.Point;
+import Exceptions.BlockErrorException;
 import Exceptions.OutOfMapException;
 
 import java.util.Random;
@@ -28,14 +29,28 @@ public class Map {
             Block b = new SandBlock();
             int row = rand.nextInt(this.sizeX);
             int col = rand.nextInt(this.sizeY);
-            System.out.println(row);
-            System.out.println(col);
             try {
                 this.insertBlockAtPoint(new Point(row, col), b);
             } catch (OutOfMapException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private Block getBlock(Point p) throws OutOfMapException {
+        if(!this.isInMapBound(p)){
+            throw new OutOfMapException();
+        }
+        return this.mapBlocks[p.x][p.y];
+    }
+    public boolean isPickable(Point p){
+        return this.mapBlocks[p.x][p.y].isPickable();
+    }
+    public Block gimmiePickable(Point p) throws BlockErrorException, OutOfMapException {
+        if(!this.isPickable(p)){
+            throw new BlockErrorException();
+        }
+        return this.getBlock(p);
     }
 
     public boolean isInMapBound(Point point){
