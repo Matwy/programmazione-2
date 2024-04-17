@@ -1,5 +1,7 @@
 package Data.UI;
 import Data.Block.*;
+import Data.Block.interfaces.Block;
+import Data.Block.interfaces.SmeltableBlock;
 import Data.Point;
 import Exceptions.OutOfMapException;
 
@@ -18,7 +20,7 @@ public class Map {
         this.mapBlocks = new AbstractBlock[sizex][sizey];
 
         for(int i=0; i<mapBlocks.length; i++)
-            for (int j=0; j<mapBlocks[i].length; j++)
+            for (int j=0; j<mapBlocks.length; j++)
                 this.mapBlocks[i][j] = new AirBlock();
         this.AddSea();
         Random rand = new Random();
@@ -26,6 +28,8 @@ public class Map {
             Block b = new SandBlock();
             int row = rand.nextInt(this.sizeX);
             int col = rand.nextInt(this.sizeY);
+            System.out.println(row);
+            System.out.println(col);
             try {
                 this.insertBlockAtPoint(new Point(row, col), b);
             } catch (OutOfMapException e) {
@@ -38,7 +42,7 @@ public class Map {
         return point.x < this.sizeX && point.y < this.sizeY;
     }
     public boolean isSmeltable(Point point) throws OutOfMapException{
-        if(isInMapBound(point))
+        if(!isInMapBound(point))
             throw new OutOfMapException();
 
         return this.mapBlocks[point.x][point.y] instanceof SmeltableBlock;
@@ -82,7 +86,7 @@ public class Map {
     }
 
     public void insertBlockAtPoint(Point insertPoint, Block block) throws OutOfMapException{
-        if(isInMapBound(insertPoint))
+        if(!isInMapBound(insertPoint))
             throw new OutOfMapException();
 
         // Insert The block

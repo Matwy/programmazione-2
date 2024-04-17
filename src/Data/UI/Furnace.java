@@ -1,8 +1,8 @@
 package Data.UI;
 
-import Data.Block.Block;
+import Data.Block.interfaces.Block;
 import Data.Block.NullBlock;
-import Data.Block.SmeltableBlock;
+import Data.Block.interfaces.SmeltableBlock;
 
 public class Furnace {
     public SmeltableBlock input;
