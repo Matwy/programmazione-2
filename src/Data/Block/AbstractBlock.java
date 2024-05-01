@@ -32,4 +32,7 @@ public abstract class AbstractBlock implements Block {
     public String toString(){
         return this.blockName;
     }
+    public String displayInInventory(){
+        return "["+this.Type+"]";
+    }
 }

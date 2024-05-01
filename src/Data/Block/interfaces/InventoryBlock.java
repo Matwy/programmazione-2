@@ -1,5 +1,5 @@
-package Data.Block;
+package Data.Block.interfaces;
 
-public interface InventoryBlock extends Block{
-    public void displayInInventory();
+public interface InventoryBlock {
+    public String displayInInventory();
 }

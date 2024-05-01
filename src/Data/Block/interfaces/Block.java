@@ -1,6 +1,6 @@
 package Data.Block.interfaces;
 
-public interface Block {
+public interface Block extends InventoryBlock{
 
     public char Display();
     public boolean isFallThrough();

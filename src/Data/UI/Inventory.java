@@ -1,6 +1,7 @@
 package Data.UI;
 
 import Data.Block.interfaces.Block;
+import Data.Block.interfaces.InventoryBlock;
 import Data.Block.interfaces.SmeltableBlock;
 import Exceptions.BlockErrorException;
 
@@ -24,7 +25,7 @@ public class Inventory {
         return (SmeltableBlock) this.blocks.get(index);
     }
     public void printInInventory(){
-        for (Block block : this.blocks) {
+        for (InventoryBlock block : this.blocks) {
             System.out.print(block.displayInInventory());
         }
     }
