@@ -1,2 +1,3 @@
-package Data.Block;public class RawIronBlock {
+package Data.Block;
+public class RawIronBlock {
 }

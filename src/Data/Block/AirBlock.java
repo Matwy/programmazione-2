@@ -1,4 +1,4 @@
-package Data;
+package Data.Block;
 
 public class AirBlock extends AbstractBlock {
 

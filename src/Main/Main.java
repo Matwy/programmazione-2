@@ -1,5 +1,5 @@
 package Main;
-import Data.Map;
+import Data.UI.Map;
 import Data.Point;
 import Exceptions.OutOfMapException;
 

@@ -1,10 +1,11 @@
 package Data.UI;
-import Data.Block.*;
+import Data.Block.AbstractBlock;
 import Data.Block.interfaces.Block;
 import Data.Block.interfaces.SmeltableBlock;
 import Data.Point;
 import Exceptions.BlockErrorException;
 import Exceptions.OutOfMapException;
+import Data.Block.*;
 
 import java.util.Random;
 

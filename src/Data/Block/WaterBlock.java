@@ -1,4 +1,4 @@
-package Data;
+package Data.Block;
 
 public class WaterBlock extends AbstractBlock{
     public WaterBlock() {

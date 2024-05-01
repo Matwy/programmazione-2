@@ -1,2 +1,3 @@
-package Data.Block;public class IronSwordBlock {
+package Data.Block;
+public class IronSwordBlock {
 }

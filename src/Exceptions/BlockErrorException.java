@@ -1,2 +1,3 @@
-package Exceptions;public class BlockErrorException {
+package Exceptions;
+public class BlockErrorException extends Throwable{
 }

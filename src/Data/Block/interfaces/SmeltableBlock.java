@@ -1,4 +1,4 @@
-package Data.Block;
+package Data.Block.interfaces;
 
 import Data.Block.Block;
 
