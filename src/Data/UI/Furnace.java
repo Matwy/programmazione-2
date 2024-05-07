@@ -25,6 +25,11 @@ public class Furnace {
         return this.input;
     }
 
+    public Block getOutput(){
+        Block b = this.output;
+        this.output = new NullBlock();
+        return b;
+    }
     public void DisplayOnOut(){
         System.out.println("|| "
                 +this.input.Display()

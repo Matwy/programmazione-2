@@ -42,7 +42,24 @@ public class Map {
         if(!this.isInMapBound(p)){
             throw new OutOfMapException();
         }
-        return this.mapBlocks[p.x][p.y];
+        Block b = this.mapBlocks[p.x][p.y];
+        this.mapBlocks[p.x][p.y] = new AirBlock();
+
+        for(int i = p.y-1; i > 0 && this.mapBlocks[p.x][i].isGravity(); i--){
+            this.swapCell(new Point(p.x, i), new Point(p.x, i+1));
+
+            // Se un blocco solido con gravity cade su una torcia
+            // viene cambiato con AirBlock e si fanno cadere i blocchi sopra
+            if(this.isInMapBound(new Point(p.x, i+2)) &&
+                this.mapBlocks[p.x][i+2] instanceof TorchBlock &&
+                !this.mapBlocks[p.x][i+1].isFallThrough())
+            {
+                this.mapBlocks[p.x][i+1] = new AirBlock();  // penso sia sbagliato comunque
+                i++;
+            }
+
+        }
+        return b;
     }
     public boolean isPickable(Point p){
         return this.mapBlocks[p.x][p.y].isPickable();
@@ -118,8 +135,11 @@ public class Map {
             this.swapCell(new Point(insertPoint.x, i-1), new Point(insertPoint.x, i));
             i++;
         }
-
+        if(!block.isFallThrough() && this.mapBlocks[insertPoint.x][i] instanceof TorchBlock){
+            this.mapBlocks[insertPoint.x][i] = new AirBlock();
+        }
     }
+
     public void insertBlockAtPoint(Point insertPoint, char blockType) throws OutOfMapException{
         AbstractBlock block = switch (blockType) {
             case 'S' -> new SandBlock();

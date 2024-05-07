@@ -25,7 +25,7 @@ public class Main {
         map.DisplayOnOut();
     }
     public static void test_picking(){
-        int INTERACTIONS = 3;
+        int INTERACTIONS = 99;
         MainView m = new MainView();
         m.DisplayInOut();
         for (int i = 0 ; i < INTERACTIONS ; i++){

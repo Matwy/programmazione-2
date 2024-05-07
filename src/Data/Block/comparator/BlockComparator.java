@@ -1,4 +1,4 @@
-package Data.comparator;
+package Data.Block.comparator;
 
 import Data.Block.interfaces.Block;
 import java.util.Comparator;

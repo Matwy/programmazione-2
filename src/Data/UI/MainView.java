@@ -29,18 +29,21 @@ public class MainView {
         this.furnace.setInput(block);
     }
     public void fromFurnaceIntoInventory(){
-        this.inventory.addBlock(this.furnace.output);
+        this.inventory.addBlock(this.furnace.getOutput());
     }
     public void pickUpBlock(Point p) throws OutOfMapException, BlockErrorException {
         Block b = this.map.gimmiePickable(p);
         this.inventory.addBlock(b);
     }
-    public void toggleInventoryComparator(){}
+    public void toggleInventoryComparator(){
+        this.inventory.switchBlockComparator();
+    }
     public void smelt(){
         this.furnace.smeltInput();
     }
     public void DisplayInOut(){
         this.map.DisplayOnOut();
         this.furnace.DisplayOnOut();
+        this.inventory.printInInventory();
     }
 }
